@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <script>
+        function concat()
+        {
+            var array = document.getElementById('frase');
+            var array2 = prompt("Introduce un segundo array separado por comas: ");
+            array2 = array2.split(",");
+            document.getElementById('inicio').innerHTML = "Tu array inicial es: " + array.toString() + " y el segundo es: " + array2.toString();
+            document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.concat(array2);     
+            document.getElementById("frase").value = array.toString();
+        }
+
+        function join()
+        {
+            var array = document.getElementById('frase');
+            var separador = prompt("Introduce un separador (si es que lo deseas):");
+            document.getElementById('inicio').innerHTML = "Tu array inicial es: " + array.toString();
+            document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.join(separador);
+            document.getElementById("frase").value = array.toString();
+        }
+
+        function pop()
+        {
+            var array = document.getElementById('frase');
+            document.getElementById('inicio').innerHTML = "Tu array inicial es: " + array.toString();
+            document.getElementById('resultado').innerHTML = "Se elimina: " + array.pop() + " y el resultado es: " + array.toString();
+            document.getElementById("frase").value = array.toString();
+        }
+
+        function push()
+        {
+            var array = document.getElementById('frase');
+            var añadido = prompt("Introduce lo que quieras añadir:");
+            if(añadido==""){
+                document.getElementById('inicio').innerHTML = "No se ha añadido nada";
+                document.getElementById('resultado').innerHTML = "Su array es: " + array.toString();
+                document.getElementById("frase").value = array.toString();
+            }else{
+                document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+                array.push(añadido);
+                document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.toString(); 
+                document.getElementById("frase").value = array.toString();
+            }
+        }
+
+        function reverse()
+        {
+            var array = document.getElementById('frase');
+            document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+            array.reverse();
+            document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.toString(); 
+            document.getElementById("frase").value = array.toString();
+        }
+
+        function shift()
+        {
+            var array = document.getElementById('frase');
+            document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+            document.getElementById('resultado').innerHTML = "Se elimina: " + array.shift() + " y el resultado es: " + array.toString();
+            document.getElementById("frase").value = array.toString();
+        }
+
+        function slice()
+        {
+            var array = document.getElementById('frase');
+            var inicio = prompt("Introduce la posición desde la que va a cortar:");
+            var final = prompt("Introduce la posición hasta la que quieres cortar:");                       
+            if(inicio == parseInt(inicio) && inicio < array.length && final==""  && inicio < 0  && final < 0){
+                document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+                document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.slice(inicio); 
+                document.getElementById("frase").value = array.slice(inicio);
+            }else if(inicio == parseInt(inicio) && final == parseInt(final) && final <= array.length && inicio < array.length  && inicio < 0  && final < 0){
+                document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+                document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.slice(inicio, final); 
+                document.getElementById("frase").value = array.slice(inicio, final);
+            }else{
+                document.getElementById('inicio').innerHTML = "Datos incorrectos.";
+                document.getElementById('resultado').innerHTML = "Inténtelo de nuevo.";
+            } 
+        }
+
+        function sort()
+        {
+            var array = document.getElementById('frase');
+            var numeros = true;
+
+            function ordenarCreciente(a,b) {
+                return parseInt(a) - parseInt(b);
+            }
+
+            function ordenarDecreciente(a,b) {
+                return parseInt(b) - parseInt(a);
+            }
+                for (const value of array) {
+                    if(value != parseInt(value)){
+                        numeros = false;
+                    }
+                }
+                if(numeros){
+                    var modo = prompt('Ordenacion ("Creciente"/"Decreciente"): ');
+                    if(modo == "Creciente"){
+                        
+                        document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+                        array.sort(ordenarCreciente);
+                        document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.toString(); 
+                        document.getElementById("frase").value = array.toString();
+                    }else if(modo == "Decreciente"){
+                        
+                        document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString();
+                        array.sort(ordenarDecreciente);
+                        document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.toString();
+                        document.getElementById("frase").value = array.toString();
+                    }else{
+                        document.getElementById('inicio').innerHTML = "Datos incorrectos.";
+                        document.getElementById('resultado').innerHTML = "Inténtelo de nuevo.";
+                    }
+                }
+        }
+
+        function splice()
+        {
+            var array = document.getElementById('frase');
+            var posicion = prompt("Elige la posición: ");
+            if(posicion == parseInt(posicion) && posicion < array.length && posicion > 0){
+                var cantidadSustituir = prompt("Cantidad a sustituir: ");
+                if(cantidadSustituir == parseInt(cantidadSustituir) && cantidadSustituir < array.length && cantidadSustituir >= 0){
+                    var introducirArray = prompt('Introduce lo que quieras añadir:');
+                    if(introducirArray==""){
+                        document.getElementById('inicio').innerHTML = "Rellena el array";
+                        document.getElementById('resultado').innerHTML = "Inténtalo de nuevo.";
+                    }else{
+                        var array = introducirArray.split(",");
+                        document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString() + " y añades " + array.toString() + " en la posición " + posicion + " eliminando los " + cantidadSustituir + " sigueintes.";
+                        array.splice(posicion, cantidadSustituir, array);
+                        document.getElementById('resultado').innerHTML = "Y el resultado es: " + array.toString();
+                        document.getElementById("frase").value = array.toString();
+                    }       
+                }else{
+                    document.getElementById('inicio').innerHTML = "Rellena correctamente las cantidades.";
+                    document.getElementById('resultado').innerHTML = "Inténtalo de nuevo.";
+                }
+                }else{
+                    document.getElementById('inicio').innerHTML = "Elige una posición válida.";
+                    document.getElementById('resultado').innerHTML = "Inténtalo de nuevo.";
+            }
+        }
+
+        function unshift()
+        {
+            var array = document.getElementById('frase');
+            var nuevoArray = prompt('¿Qué quieres añadir al comienzo del array?');
+            if(nuevoArray==""){
+                document.getElementById('inicio').innerHTML = "Rellena la información.";
+                document.getElementById('resultado').innerHTML = "Inténtalo de nuevo.";
+            }else{
+                var nuevoArray2Bien = nuevoArray.split(",");
+                document.getElementById('inicio').innerHTML = "Tu array es: " + array.toString() + ", y añadiendo " + nuevoArray2Bien.toString() + " queda una longitud de " + arrayBien.unshift(nuevoArray2Bien);
+                document.getElementById('resultado').innerHTML = "Y el array final: " + array.toString();
+                document.getElementById("frase").value = array.toString();
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="4.html" method="post">
+        <label>Introduce un array separado por comas: <input type="text" name="frase" id="frase"></label><br><br>
+        <input type="button" value="concat" onclick="concat()">
+        <input type="button" value="join" onclick="join()">
+        <input type="button" value="pop" onclick="pop()">
+        <input type="button" value="push" onclick="push()">
+        <input type="button" value="reverse" onclick="reverse()">
+        <input type="button" value="shift" onclick="shift()">
+        <input type="button" value="slice" onclick="slice()">
+        <input type="button" value="sort" onclick="sort()">
+        <input type="button" value="splice" onclick="splice()">
+        <input type="button" value="unShift" onclick="unshift()">
+        <br><br>       
+    </form>
+    <div id="inicio"></div>
+    <div id="resultado"></div>
+</body>
+</html>
